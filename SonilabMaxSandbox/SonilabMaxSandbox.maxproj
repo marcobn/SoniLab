@@ -2,8 +2,8 @@
 	"name" : "SonilabMaxSandbox",
 	"version" : 1,
 	"creationdate" : 3729173454,
-	"modificationdate" : 3729196254,
-	"viewrect" : [ 1704.0, 351.0, 300.0, 500.0 ],
+	"modificationdate" : 3729198103,
+	"viewrect" : [ 926.0, 463.0, 300.0, 500.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
@@ -21,6 +21,11 @@
 			}
 ,
 			"waveguideStrings.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"aj matrix to jitter.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
