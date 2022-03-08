@@ -3,15 +3,19 @@ from os.path import join as pjoin
 import numpy as np
 import networkx as nx
 import community as cm
-from fury import actor, window, colormap as cmap
+from fury import actor, window, colormap as cmap, utils, pick
 from fury.lib import numpy_support
 import random
 from scipy.spatial.distance import pdist,squareform
 from itertools import combinations
+import json
+
+# Import needed modules from osc4py3
+from osc4py3.as_eventloop import *
+from osc4py3 import oscbuildparse
 
 from musicntwrk.utils.communications import *
 from musicntwrk.utils.load_balancing import *
-
 
 from mpi4py import MPI
 # initialize parallel execution
@@ -134,14 +138,94 @@ def new_layout_timer(showm, edges_list, vertices_count,
             showm.exit()
     return _timer
 
+def left_click_callback(obj, event):
+
+        # Get the event position on display and pick
+
+    event_pos = pickm.event_position(showm.iren)
+    picked_info = pickm.pick(event_pos, showm.scene)
+
+    vertex_index = picked_info['vertex']
+
+    # Calculate the objects index
+
+    object_index = int(np.floor((vertex_index / num_vertices) *
+                          num_objects))
+
+    # Find how many vertices correspond to each object
+    sec = int(num_vertices / num_objects)
+
+    if not selected[object_index]:
+        new_color = np.array([0, 0, 0], dtype='uint8')
+        selected[object_index] = True
+        # Build a simple message and send it.
+        msg = oscbuildparse.OSCMessage("/test/me", ",i", [object_index])
+        osc_send(msg, "aclientname")
+        osc_process()
+        
+    else:
+        new_color = colors[object_index]*255
+        selected[object_index] = False
+
+    # Update colors
+    vcolors[object_index * sec: object_index * sec + sec] = new_color
+
+    # Tell actor that memory is modified
+    utils.update_actor(sphere_actor)
+
+    showm.render()
+
+def json_dump():
+    networkjson = {}
+    networkjson["pos"] = {}
+    networkjson["degree"] = {}
+    networkjson["edges"] = {}
+    networkjson["class"] = {}
+    networkjson["adjacencyMatrix"] = {}
+    networkjson["spectralNumber"] = {}
+    networkjson["spectralOrder"] = S
+    for n in d:
+        networkjson["degree"][n[0]] = n[1]
+    for p in pos.keys():
+        networkjson["pos"][p] = pos[p].tolist()
+    for e in network.edges:
+        if (e[0] in networkjson["edges"].keys()):
+            networkjson["edges"][e[0]].append(e[1])
+        else:
+            networkjson["edges"][e[0]] = [e[1]]
+        if (e[1] in networkjson["edges"].keys()):
+            networkjson["edges"][e[1]].append(e[0])
+        else:
+            networkjson["edges"][e[1]] = [e[0]]
+    for i in range(0,len(categories)):
+        networkjson["class"][i] = categories[i]
+    
+    for i in range(0, aj.shape[0]):
+        networkjson["adjacencyMatrix"][i] = aj[i].tolist()
+        
+    for i in range(0, len(S)):
+        networkjson["spectralNumber"][S[i]] = i
+        
+    with open('./network.json', 'w') as f:
+        json.dump(networkjson, f)
+    
+    msg = oscbuildparse.OSCMessage("/test/me", ",s", ['network dump'])
+    osc_send(msg, "aclientname")
+    osc_process()
+
+# Start the OSC process.
+osc_startup()
+# Make client channels to send packets.
+osc_udp_client("127.0.0.1", 8001, "aclientname")
+
+
+
 network = nx.barabasi_albert_graph(vertices_count,2)
 # initial postions of nodes
 positions = []
-for pos in nx.spring_layout(network,k=None,iterations=100,dim=3).values():
-#for pos in nx.kamada_kawai_layout(network,dim=3).values():
-# for pos in nx.random_layout(network,dim=3).values():
-# for pos in nx.spectral_layout(network,dim=3).values():
-    positions.append(pos)
+pos = nx.spring_layout(network,k=None,iterations=100,dim=3)
+for p in pos.values():
+    positions.append(p)
 positions = view_size * np.array(positions)
 # detect communities
 part = cm.best_partition(network)
@@ -157,7 +241,7 @@ category_colors = cmap.distinguishable_colormap(nb_colors=len(index2category))
 
 colors = np.array([category_colors[category2index[category]]
                    for category in categories])
-                
+
 # display degree as size
 d = nx.degree(network)
 radii = np.array([(d[v]+1)*0.2 for v in network.nodes()])
@@ -168,12 +252,38 @@ for source, target in edges:
 
 edges_colors = np.average(np.array(edges_colors), axis=1)
 
+# Some more topological stuff
+aj = nx.adjacency_matrix(network).toarray()
+S = nx.spectral_ordering(network)
+
+###############################################################################
+# Write network information to JSON file
+    
+json_dump()
+###############################################################################
+# define sphere actor
+
 sphere_actor = actor.sphere(centers=np.zeros(positions.shape),
                             colors=colors,
                             radii=radii * 0.5,
                             theta=24,
                             phi=24)
-                        
+sphere_actor.GetProperty().SetRoughness(1.0)
+# Access the memory of the vertices of the spheres
+vertices = utils.vertices_from_actor(sphere_actor)
+num_vertices = vertices.shape[0]
+num_objects = positions.shape[0]
+selected = np.zeros(num_objects, dtype=bool)
+# Access the memory of the color of the spheres
+vcolors = utils.colors_from_actor(sphere_actor, 'colors')
+
+# Bind the callback to the actor
+
+sphere_actor.AddObserver('LeftButtonPressEvent', left_click_callback, 1)
+
+###############################################################################
+# define lines actors
+
 lines_actor = []
 for n in range(len(edges)):
     lines_actor.append(actor.line([np.zeros((2,3))],colors=edges_colors[n], opacity= 1.0, lod=False,
@@ -186,6 +296,11 @@ camera = scene.camera()
 for line in lines_actor:
     scene.add(line)
 scene.add(sphere_actor)
+
+###############################################################################
+# Create the Picking manager
+
+pickm = pick.PickingManager()
 
 showm = window.ShowManager(scene, reset_camera=False, size=wsize, order_transparent=True, multi_samples=8)
 
