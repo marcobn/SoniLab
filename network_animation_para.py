@@ -95,7 +95,7 @@ def new_layout_timer(showm, edges_list, vertices_count,
             scene.rm(lines_actor[elem])
             lines_actor.pop(elem)
             new_net = nx.Graph([tuple(e) for e in edges_list.tolist()])
-            json_dump(new_net,pos,message='link '+str(elem)+' broken')
+            json_dump(new_net,pos,filout='./network'+str(counter)+'.json',message='link '+str(elem)+' broken')
 #           except:
 #               pass
         
@@ -177,7 +177,7 @@ def left_click_callback(obj, event):
 
     showm.render()
 
-def json_dump(network,pos,message='network dump'):
+def json_dump(network,pos,filout='./network.json',message='network dump'):
     networkjson = {}
     networkjson["pos"] = {}
     networkjson["degree"] = {}
@@ -208,7 +208,7 @@ def json_dump(network,pos,message='network dump'):
         networkjson["adjacencyMatrix"][i] = aj[i].tolist()
     for i in range(0, len(S)):
         networkjson["spectralNumber"][S[i]] = i
-    with open('./network.json', 'w') as f:
+    with open(filout, 'w') as f:
         json.dump(networkjson, f, )
         f.close()
     
@@ -266,7 +266,7 @@ json_dump(network,positions,message='network dump')
 
 ###############################################################################
 # define scene
-scene = window.Scene(background=(0,1,0))
+scene = window.Scene()
 scene.SetBackground((255,255,255))
 camera = scene.camera()
 
