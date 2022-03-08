@@ -89,20 +89,22 @@ def new_layout_timer(showm, edges_list, vertices_count,
 
         # remove random link every nsteps
         if decimate and counter%nstep == 0 and counter >= 50:
-            try: 
-                elem = np.random.choice(range(len(edges_list)))
-                edges_list = np.delete(edges_list,elem,0)
-                scene.rm(lines_actor[elem])
-                lines_actor.pop(elem)
-            except:
-                pass
+#           try: 
+            elem = np.random.choice(range(len(edges_list)))
+            edges_list = np.delete(edges_list,elem,0)
+            scene.rm(lines_actor[elem])
+            lines_actor.pop(elem)
+            new_net = nx.Graph([tuple(e) for e in edges_list.tolist()])
+            json_dump(new_net,pos,message='link '+str(elem)+' broken')
+#           except:
+#               pass
         
         velocities += forces * deltaT
         velocities *= (1.0 - viscosity)
         pos += velocities * deltaT
         pos[:, 0] -= np.mean(pos[:, 0])
         pos[:, 1] -= np.mean(pos[:, 1])
-        pos[:, 2] -= np.mean(pos[:, 2])
+        pos[:, 2] -= np.mean(pos[:, 2])        
         return
     
     counter = 0
@@ -175,7 +177,7 @@ def left_click_callback(obj, event):
 
     showm.render()
 
-def json_dump():
+def json_dump(network,pos,message='network dump'):
     networkjson = {}
     networkjson["pos"] = {}
     networkjson["degree"] = {}
@@ -183,10 +185,9 @@ def json_dump():
     networkjson["class"] = {}
     networkjson["adjacencyMatrix"] = {}
     networkjson["spectralNumber"] = {}
-    networkjson["spectralOrder"] = S
-    for n in d:
+    for n in nx.degree(network):
         networkjson["degree"][n[0]] = n[1]
-    for p in pos.keys():
+    for p in range(pos.shape[0]):
         networkjson["pos"][p] = pos[p].tolist()
     for e in network.edges:
         if (e[0] in networkjson["edges"].keys()):
@@ -197,19 +198,21 @@ def json_dump():
             networkjson["edges"][e[1]].append(e[0])
         else:
             networkjson["edges"][e[1]] = [e[0]]
+    part = cm.best_partition(network)
+    categories = [part.get(node) for node in network.nodes()]
     for i in range(0,len(categories)):
         networkjson["class"][i] = categories[i]
-    
+    aj = nx.adjacency_matrix(network).toarray()
+    S = nx.spectral_ordering(network)
     for i in range(0, aj.shape[0]):
         networkjson["adjacencyMatrix"][i] = aj[i].tolist()
-        
     for i in range(0, len(S)):
         networkjson["spectralNumber"][S[i]] = i
-        
     with open('./network.json', 'w') as f:
-        json.dump(networkjson, f)
+        json.dump(networkjson, f, )
+        f.close()
     
-    msg = oscbuildparse.OSCMessage("/test/me", ",s", ['network dump'])
+    msg = oscbuildparse.OSCMessage("/test/me", ",s", [message])
     osc_send(msg, "aclientname")
     osc_process()
 
@@ -218,12 +221,13 @@ osc_startup()
 # Make client channels to send packets.
 osc_udp_client("127.0.0.1", 8001, "aclientname")
 
-
-
+###############################################################################
+# Generate network - see https://networkx.org/documentation/stable/reference/generators.html for other network models
 network = nx.barabasi_albert_graph(vertices_count,2)
-# initial postions of nodes
-positions = []
+# initial postions of nodes - see https://networkx.org/documentation/stable/reference/drawing.html for other layouts
 pos = nx.spring_layout(network,k=None,iterations=100,dim=3)
+
+positions = []
 for p in pos.values():
     positions.append(p)
 positions = view_size * np.array(positions)
@@ -252,14 +256,20 @@ for source, target in edges:
 
 edges_colors = np.average(np.array(edges_colors), axis=1)
 
-# Some more topological stuff
-aj = nx.adjacency_matrix(network).toarray()
-S = nx.spectral_ordering(network)
+## Some more topological stuff
+#aj = nx.adjacency_matrix(network).toarray()
+#S = nx.spectral_ordering(network)
 
 ###############################################################################
 # Write network information to JSON file
-    
-json_dump()
+json_dump(network,positions,message='network dump')
+
+###############################################################################
+# define scene
+scene = window.Scene(background=(0,1,0))
+scene.SetBackground((255,255,255))
+camera = scene.camera()
+
 ###############################################################################
 # define sphere actor
 
@@ -278,8 +288,9 @@ selected = np.zeros(num_objects, dtype=bool)
 vcolors = utils.colors_from_actor(sphere_actor, 'colors')
 
 # Bind the callback to the actor
-
 sphere_actor.AddObserver('LeftButtonPressEvent', left_click_callback, 1)
+# add spheres to scene
+scene.add(sphere_actor)
 
 ###############################################################################
 # define lines actors
@@ -289,19 +300,13 @@ for n in range(len(edges)):
     lines_actor.append(actor.line([np.zeros((2,3))],colors=edges_colors[n], opacity= 1.0, lod=False,
         fake_tube=True, linewidth=3))
 
-scene = window.Scene(background=(0,1,0))
-scene.SetBackground((255,255,255))
-camera = scene.camera()
-
 for line in lines_actor:
     scene.add(line)
-scene.add(sphere_actor)
 
 ###############################################################################
 # Create the Picking manager
-
 pickm = pick.PickingManager()
-
+# Create the show manager
 showm = window.ShowManager(scene, reset_camera=False, size=wsize, order_transparent=True, multi_samples=8)
 
 showm.initialize()
@@ -313,9 +318,8 @@ timer_callback = new_layout_timer(
     max_iterations=maxiter,
     vertex_initial_positions=positions)
 
-
-# Run every 16 milliseconds
-showm.add_timer_callback(True, 32, timer_callback)
+# Run every 20 milliseconds (30 fps)
+showm.add_timer_callback(True, 2, timer_callback)
 
 showm.start()
 
