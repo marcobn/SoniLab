@@ -9,7 +9,8 @@ import random
 from scipy.spatial.distance import pdist,squareform
 from itertools import combinations
 import json
-
+import os
+import shutil
 # Import needed modules from osc4py3
 from osc4py3.as_eventloop import *
 from osc4py3 import oscbuildparse
@@ -95,7 +96,7 @@ def new_layout_timer(showm, edges_list, vertices_count,
             scene.rm(lines_actor[elem])
             lines_actor.pop(elem)
             new_net = nx.Graph([tuple(e) for e in edges_list.tolist()])
-            json_dump(new_net,pos,filout='./network'+str(counter)+'.json',message='link '+str(elem)+' broken')
+            json_dump(new_net,pos,filout='./networkjson/network'+str(counter)+'.json',address= "link/broken", message = str(elem))
 #           except:
 #               pass
         
@@ -177,7 +178,7 @@ def left_click_callback(obj, event):
 
     showm.render()
 
-def json_dump(network,pos,filout='./network.json',message='network dump'):
+def json_dump(network,pos,filout='./networkjson/network.json',address='/network',message='network dump'):
     networkjson = {}
     networkjson["pos"] = {}
     networkjson["degree"] = {}
@@ -212,14 +213,23 @@ def json_dump(network,pos,filout='./network.json',message='network dump'):
         json.dump(networkjson, f, )
         f.close()
     
-    msg = oscbuildparse.OSCMessage("/test/me", ",s", [message])
+    msg = oscbuildparse.OSCMessage(address, ",s", [message])
     osc_send(msg, "aclientname")
     osc_process()
-
+    
+    msg = oscbuildparse.OSCMessage("/newNetwork", ",s", [os.path.normpath(os.path.abspath(filout))])
+    osc_send(msg, "aclientname")
+    osc_process()
+    
 # Start the OSC process.
 osc_startup()
 # Make client channels to send packets.
-osc_udp_client("127.0.0.1", 8001, "aclientname")
+osc_udp_client("127.0.0.1", 8090, "aclientname")
+
+# delete network json Folder
+shutil.rmtree("./networkjson")
+# make network json filter
+os.mkdir("./networkjson")
 
 ###############################################################################
 # Generate network - see https://networkx.org/documentation/stable/reference/generators.html for other network models
