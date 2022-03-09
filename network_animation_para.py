@@ -41,7 +41,7 @@ deltaT = 1.0
 temperature = 0.05
 
 nstep = 30
-decimate = True
+decimate = False
 
 def new_layout_timer(showm, edges_list, vertices_count,
                      max_iterations=1000, vertex_initial_positions=None):
@@ -96,7 +96,7 @@ def new_layout_timer(showm, edges_list, vertices_count,
             scene.rm(lines_actor[elem])
             lines_actor.pop(elem)
             new_net = nx.Graph([tuple(e) for e in edges_list.tolist()])
-            json_dump(new_net,pos,filout='./networkjson/network'+str(counter)+'.json',address= "link/broken", message = str(elem))
+            json_dump(new_net,pos,filout='./networkjson/network'+str(counter)+'.json',address= "/link/broken", message = str(elem))
 #           except:
 #               pass
         
@@ -162,7 +162,7 @@ def left_click_callback(obj, event):
         new_color = np.array([0, 0, 0], dtype='uint8')
         selected[object_index] = True
         # Build a simple message and send it.
-        msg = oscbuildparse.OSCMessage("/test/me", ",i", [object_index])
+        msg = oscbuildparse.OSCMessage("/clicked", ",i", [object_index])
         osc_send(msg, "aclientname")
         osc_process()
         
@@ -182,7 +182,8 @@ def json_dump(network,pos,filout='./networkjson/network.json',address='/network'
     networkjson = {}
     networkjson["pos"] = {}
     networkjson["degree"] = {}
-    networkjson["edges"] = {}
+    networkjson["node_edges"] = {}
+    networkjson["edge_nodes"] = {}
     networkjson["class"] = {}
     networkjson["adjacencyMatrix"] = {}
     networkjson["spectralNumber"] = {}
@@ -190,15 +191,18 @@ def json_dump(network,pos,filout='./networkjson/network.json',address='/network'
         networkjson["degree"][n[0]] = n[1]
     for p in range(pos.shape[0]):
         networkjson["pos"][p] = pos[p].tolist()
+    count = 0
     for e in network.edges:
-        if (e[0] in networkjson["edges"].keys()):
-            networkjson["edges"][e[0]].append(e[1])
+        networkjson["edge_nodes"][str(count)] = e
+        count += 1
+        if (e[0] in networkjson["node_edges"].keys()):
+            networkjson["node_edges"][e[0]].append(e[1])
         else:
-            networkjson["edges"][e[0]] = [e[1]]
-        if (e[1] in networkjson["edges"].keys()):
-            networkjson["edges"][e[1]].append(e[0])
+            networkjson["node_edges"][e[0]] = [e[1]]
+        if (e[1] in networkjson["node_edges"].keys()):
+            networkjson["node_edges"][e[1]].append(e[0])
         else:
-            networkjson["edges"][e[1]] = [e[0]]
+            networkjson["node_edges"][e[1]] = [e[0]]
     part = cm.best_partition(network)
     categories = [part.get(node) for node in network.nodes()]
     for i in range(0,len(categories)):
@@ -212,14 +216,16 @@ def json_dump(network,pos,filout='./networkjson/network.json',address='/network'
     with open(filout, 'w') as f:
         json.dump(networkjson, f, )
         f.close()
-    
-    msg = oscbuildparse.OSCMessage(address, ",s", [message])
-    osc_send(msg, "aclientname")
-    osc_process()
-    
+
     msg = oscbuildparse.OSCMessage("/newNetwork", ",s", [os.path.normpath(os.path.abspath(filout))])
     osc_send(msg, "aclientname")
     osc_process()
+
+    msg = oscbuildparse.OSCMessage(address, None, [message])
+    osc_send(msg, "aclientname")
+    osc_process()
+    
+
     
 # Start the OSC process.
 osc_startup()
