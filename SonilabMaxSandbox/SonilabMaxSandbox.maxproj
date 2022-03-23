@@ -2,8 +2,8 @@
 	"name" : "SonilabMaxSandbox",
 	"version" : 1,
 	"creationdate" : 3729173454,
-	"modificationdate" : 3730636826,
-	"viewrect" : [ 509.0, 450.0, 300.0, 500.0 ],
+	"modificationdate" : 3730923665,
+	"viewrect" : [ 1594.0, 462.0, 300.0, 500.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
@@ -25,12 +25,32 @@
 				"local" : 1
 			}
 ,
+			"node.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"cp.multitap~.maxhelp" : 			{
+				"kind" : "helpfile",
+				"local" : 1
+			}
+,
 			"aj matrix to jitter.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
 ,
 			"FMMorph.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"ResonateProject.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"cp.multitap~.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
@@ -54,6 +74,10 @@
 				"kind" : "json",
 				"local" : 1
 			}
+
+		}
+,
+		"other" : 		{
 
 		}
 
