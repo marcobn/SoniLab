@@ -2,7 +2,7 @@
 	"name" : "SonilabMaxSandbox",
 	"version" : 1,
 	"creationdate" : 3729173454,
-	"modificationdate" : 3732484587,
+	"modificationdate" : 3732918241,
 	"viewrect" : [ 310.0, 411.0, 300.0, 500.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
@@ -16,6 +16,11 @@
 			}
 ,
 			"TTS.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"cp_phasevoco.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
@@ -74,10 +79,20 @@
 				"kind" : "patcher",
 				"local" : 1
 			}
+,
+			"Poovey_SpeechExamples.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
 
 		}
 ,
 		"media" : 		{
+			"CP_Kenedy_02_01.wav" : 			{
+				"kind" : "audiofile",
+				"local" : 1
+			}
+,
 			"VowelEhyowu.wav" : 			{
 				"kind" : "audiofile",
 				"local" : 1
