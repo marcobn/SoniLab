@@ -2,7 +2,7 @@
 	"name" : "SonilabMaxSandbox",
 	"version" : 1,
 	"creationdate" : 3729173454,
-	"modificationdate" : 3732918241,
+	"modificationdate" : 3732963317,
 	"viewrect" : [ 310.0, 411.0, 300.0, 500.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
@@ -113,6 +113,10 @@
 				"kind" : "json",
 				"local" : 1
 			}
+
+		}
+,
+		"externals" : 		{
 
 		}
 ,
