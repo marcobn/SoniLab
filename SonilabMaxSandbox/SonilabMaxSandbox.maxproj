@@ -2,7 +2,7 @@
 	"name" : "SonilabMaxSandbox",
 	"version" : 1,
 	"creationdate" : 3729173454,
-	"modificationdate" : 3732963317,
+	"modificationdate" : 3733044726,
 	"viewrect" : [ 310.0, 411.0, 300.0, 500.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
@@ -83,6 +83,10 @@
 			"Poovey_SpeechExamples.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
+			}
+,
+			"mcs.dac~.maxpat" : 			{
+				"kind" : "patcher"
 			}
 
 		}
