@@ -2,45 +2,25 @@
 	"name" : "SonilabMaxSandbox",
 	"version" : 1,
 	"creationdate" : 3729173454,
-	"modificationdate" : 3733044726,
-	"viewrect" : [ 310.0, 411.0, 300.0, 500.0 ],
+	"modificationdate" : 3734475544,
+	"viewrect" : [ 430.0, 592.0, 300.0, 500.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
 	"autolocalize" : 1,
 	"contents" : 	{
 		"patchers" : 		{
-			"phasevoco.maxpat" : 			{
+			"sl.poly.wgstring.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
 ,
-			"TTS.maxpat" : 			{
+			"tinyMesh~.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
 ,
-			"cp_phasevoco.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"main.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"3DWavetable.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"waveguideStrings.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"node.maxpat" : 			{
+			"CP_1.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
@@ -55,38 +35,20 @@
 				"local" : 1
 			}
 ,
-			"aj matrix to jitter.maxpat" : 			{
+			"sound_test_environment.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"toplevel" : 1
+			}
+,
+			"soundtemplate.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
 ,
-			"FMMorph.maxpat" : 			{
+			"CP_2.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
-			}
-,
-			"ResonateProject.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"PluckTime.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"2DWaveGrain.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"Poovey_SpeechExamples.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
-			"mcs.dac~.maxpat" : 			{
-				"kind" : "patcher"
 			}
 
 		}
@@ -105,10 +67,6 @@
 		}
 ,
 		"code" : 		{
-			"tts.js" : 			{
-				"kind" : "javascript",
-				"local" : 1
-			}
 
 		}
 ,
@@ -117,14 +75,6 @@
 				"kind" : "json",
 				"local" : 1
 			}
-
-		}
-,
-		"externals" : 		{
-
-		}
-,
-		"other" : 		{
 
 		}
 
