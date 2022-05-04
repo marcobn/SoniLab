@@ -2,8 +2,8 @@
 	"name" : "SonilabMaxSandbox",
 	"version" : 1,
 	"creationdate" : 3729173454,
-	"modificationdate" : 3734475544,
-	"viewrect" : [ 430.0, 592.0, 300.0, 500.0 ],
+	"modificationdate" : 3734532352,
+	"viewrect" : [ 283.0, 602.0, 300.0, 500.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
@@ -35,10 +35,20 @@
 				"local" : 1
 			}
 ,
+			"CP_3.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
 			"sound_test_environment.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1,
 				"toplevel" : 1
+			}
+,
+			"CP_2.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
 			}
 ,
 			"soundtemplate.maxpat" : 			{
@@ -46,7 +56,7 @@
 				"local" : 1
 			}
 ,
-			"CP_2.maxpat" : 			{
+			"resonbank.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
