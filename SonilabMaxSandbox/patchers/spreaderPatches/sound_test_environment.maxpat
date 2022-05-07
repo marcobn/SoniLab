@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 0,
+			"minor" : 2,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 621.0, 660.0, 847.0, 597.0 ],
+		"rect" : [ 621.0, 797.0, 847.0, 460.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -197,7 +197,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"parameter_enable" : 0,
 					"patching_rect" : [ 280.0, 124.0, 257.0, 23.0 ]
 				}
 
@@ -285,13 +284,6 @@
 			}
 , 			{
 				"name" : "resonbank.maxpat",
-				"bootpath" : "D:/Git/SoniLab-Max/SonilabMaxSandbox/patchers",
-				"patcherrelativepath" : "..",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "tinyMesh~.maxpat",
 				"bootpath" : "D:/Git/SoniLab-Max/SonilabMaxSandbox/patchers",
 				"patcherrelativepath" : "..",
 				"type" : "JSON",

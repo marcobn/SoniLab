@@ -2,8 +2,8 @@
 	"name" : "SonilabMaxSandbox",
 	"version" : 1,
 	"creationdate" : 3729173454,
-	"modificationdate" : 3734532352,
-	"viewrect" : [ 283.0, 602.0, 300.0, 500.0 ],
+	"modificationdate" : 3734722932,
+	"viewrect" : [ 1024.0, 589.0, 300.0, 484.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
@@ -40,6 +40,11 @@
 				"local" : 1
 			}
 ,
+			"resonbank.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
 			"sound_test_environment.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1,
@@ -56,7 +61,7 @@
 				"local" : 1
 			}
 ,
-			"resonbank.maxpat" : 			{
+			"murmer.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
@@ -70,6 +75,11 @@
 			}
 ,
 			"VowelEhyowu.wav" : 			{
+				"kind" : "audiofile",
+				"local" : 1
+			}
+,
+			"Sherbert.wav" : 			{
 				"kind" : "audiofile",
 				"local" : 1
 			}
