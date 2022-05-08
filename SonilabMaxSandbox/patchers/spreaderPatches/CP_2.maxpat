@@ -40,6 +40,18 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-3",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 130.0, 97.0, 56.0, 23.0 ],
+					"text" : "deferlow"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"bubble" : 1,
 					"id" : "obj-53",
 					"linecount" : 2,
@@ -58,7 +70,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 347.75, 204.0, 150.0, 25.0 ],
+					"patching_rect" : [ 347.75, 262.0, 150.0, 25.0 ],
 					"text" : "Make a sound here"
 				}
 
@@ -70,7 +82,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 408.0, 363.0, 150.0, 35.0 ],
+					"patching_rect" : [ 408.0, 421.0, 150.0, 35.0 ],
 					"text" : "Waits for sound to disipate to turn off"
 				}
 
@@ -515,7 +527,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 305.0, 369.0, 93.0, 23.0 ],
+					"patching_rect" : [ 305.0, 427.0, 93.0, 23.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -536,7 +548,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 305.0, 410.0, 72.0, 23.0 ],
+					"patching_rect" : [ 305.0, 468.0, 72.0, 23.0 ],
 					"text" : "mute $2, $1"
 				}
 
@@ -561,6 +573,10 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 359.0, 42.0, 28.0, 23.0 ],
+					"saved_object_attributes" : 					{
+						"attr_comment" : ""
+					}
+,
 					"text" : "in 1"
 				}
 
@@ -571,7 +587,11 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 129.0, 292.0, 43.0, 23.0 ],
+					"patching_rect" : [ 129.0, 350.0, 43.0, 23.0 ],
+					"saved_object_attributes" : 					{
+						"attr_comment" : ""
+					}
+,
 					"text" : "out~ 1"
 				}
 
@@ -583,7 +603,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "int", "int", "int" ],
-					"patching_rect" : [ 305.0, 445.0, 57.0, 23.0 ],
+					"patching_rect" : [ 305.0, 503.0, 57.0, 23.0 ],
 					"text" : "thispoly~"
 				}
 
@@ -631,7 +651,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 129.0, 92.0, 65.0, 23.0 ],
+					"patching_rect" : [ 129.0, 150.0, 65.0, 23.0 ],
 					"text" : "open $1, 1"
 				}
 
@@ -643,7 +663,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "bang" ],
-					"patching_rect" : [ 129.0, 129.0, 47.0, 23.0 ],
+					"patching_rect" : [ 129.0, 187.0, 47.0, 23.0 ],
 					"text" : "sfplay~"
 				}
 
@@ -694,7 +714,6 @@
 						"style" : "Minimal-1",
 						"subpatcher_template" : "minimal",
 						"assistshowspatchername" : 0,
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"id" : "obj-1",
@@ -3258,7 +3277,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 129.0, 204.0, 53.0, 23.0 ],
+					"patching_rect" : [ 129.0, 262.0, 53.0, 23.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -3275,7 +3294,7 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-7", 0 ],
+					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-18", 0 ]
 				}
 
@@ -3328,6 +3347,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-7", 0 ],
+					"source" : [ "obj-3", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-25", 0 ],
 					"source" : [ "obj-36", 0 ]
 				}
@@ -3343,7 +3369,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-49", 2 ],
-					"midpoints" : [ 166.5, 260.0, 388.5, 260.0 ],
+					"midpoints" : [ 166.5, 318.0, 388.5, 318.0 ],
 					"source" : [ "obj-5", 1 ]
 				}
 
@@ -3373,7 +3399,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-49", 0 ],
-					"midpoints" : [ 138.5, 268.5, 314.5, 268.5 ],
+					"midpoints" : [ 138.5, 326.5, 314.5, 326.5 ],
 					"order" : 0,
 					"source" : [ "obj-97", 0 ]
 				}
