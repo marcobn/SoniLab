@@ -2,8 +2,8 @@
 	"name" : "SonilabMaxSandbox",
 	"version" : 1,
 	"creationdate" : 3729173454,
-	"modificationdate" : 3734722932,
-	"viewrect" : [ 1024.0, 589.0, 300.0, 484.0 ],
+	"modificationdate" : 3737995565,
+	"viewrect" : [ 964.0, 581.0, 300.0, 484.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
@@ -16,6 +16,17 @@
 			}
 ,
 			"tinyMesh~.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"_main.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1,
+				"toplevel" : 1
+			}
+,
+			"listCurve~.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
@@ -45,12 +56,6 @@
 				"local" : 1
 			}
 ,
-			"sound_test_environment.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1,
-				"toplevel" : 1
-			}
-,
 			"CP_2.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
@@ -62,6 +67,16 @@
 			}
 ,
 			"murmer.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"simpleDroneGen.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"dronevoice.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
