@@ -2,7 +2,7 @@
 	"name" : "SonilabMaxSandbox",
 	"version" : 1,
 	"creationdate" : 3729173454,
-	"modificationdate" : 3737995565,
+	"modificationdate" : 3738147668,
 	"viewrect" : [ 964.0, 581.0, 300.0, 484.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
@@ -26,22 +26,12 @@
 				"toplevel" : 1
 			}
 ,
-			"listCurve~.maxpat" : 			{
-				"kind" : "patcher",
-				"local" : 1
-			}
-,
 			"CP_1.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
 ,
-			"cp.multitap~.maxhelp" : 			{
-				"kind" : "helpfile",
-				"local" : 1
-			}
-,
-			"cp.multitap~.maxpat" : 			{
+			"CP_2.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
@@ -56,7 +46,17 @@
 				"local" : 1
 			}
 ,
-			"CP_2.maxpat" : 			{
+			"listCurve~.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"cp.multitap~.maxhelp" : 			{
+				"kind" : "helpfile",
+				"local" : 1
+			}
+,
+			"cp.multitap~.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
@@ -77,6 +77,16 @@
 			}
 ,
 			"dronevoice.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"GG_2.maxpat" : 			{
+				"kind" : "patcher",
+				"local" : 1
+			}
+,
+			"GG_1.maxpat" : 			{
 				"kind" : "patcher",
 				"local" : 1
 			}
@@ -110,6 +120,10 @@
 				"kind" : "json",
 				"local" : 1
 			}
+
+		}
+,
+		"externals" : 		{
 
 		}
 

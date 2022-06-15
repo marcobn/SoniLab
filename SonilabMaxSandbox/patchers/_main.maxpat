@@ -40,6 +40,30 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-3",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 93.5, 180.0, 81.0, 23.0 ],
+					"text" : "poly~ GG_1 6"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-2",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 104.0, 205.0, 81.0, 23.0 ],
+					"text" : "poly~ GG_2 6"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-25",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -287,6 +311,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-17", 4 ],
+					"source" : [ "obj-2", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-24", 0 ],
 					"source" : [ "obj-21", 0 ]
 				}
@@ -303,6 +334,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-22", 0 ],
 					"source" : [ "obj-25", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-17", 3 ],
+					"source" : [ "obj-3", 0 ]
 				}
 
 			}
@@ -338,6 +376,20 @@
 			}
 , 			{
 				"name" : "CP_3.maxpat",
+				"bootpath" : "D:/Git/SoniLab-Max/SonilabMaxSandbox/patchers/spreaderPatches",
+				"patcherrelativepath" : "./spreaderPatches",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "GG_1.maxpat",
+				"bootpath" : "D:/Git/SoniLab-Max/SonilabMaxSandbox/patchers/spreaderPatches",
+				"patcherrelativepath" : "./spreaderPatches",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "GG_2.maxpat",
 				"bootpath" : "D:/Git/SoniLab-Max/SonilabMaxSandbox/patchers/spreaderPatches",
 				"patcherrelativepath" : "./spreaderPatches",
 				"type" : "JSON",
