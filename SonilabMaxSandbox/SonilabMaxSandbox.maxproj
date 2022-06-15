@@ -2,7 +2,7 @@
 	"name" : "SonilabMaxSandbox",
 	"version" : 1,
 	"creationdate" : 3729173454,
-	"modificationdate" : 3738147668,
+	"modificationdate" : 3738148349,
 	"viewrect" : [ 964.0, 581.0, 300.0, 484.0 ],
 	"autoorganize" : 0,
 	"hideprojectwindow" : 0,
@@ -124,6 +124,10 @@
 		}
 ,
 		"externals" : 		{
+			"sigmund~.mxe64" : 			{
+				"kind" : "object",
+				"local" : 1
+			}
 
 		}
 
