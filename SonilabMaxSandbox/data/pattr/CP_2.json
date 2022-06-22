@@ -1,0 +1,51 @@
+{
+	"pattrstorage" : 	{
+		"name" : "CP_2",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"stringVibrato" : [ 0, 0 ],
+					"stringLoose" : [ 1, 0.1 ],
+					"stringAdsr0" : [ 1, 5, 0, 0 ],
+					"stringMode" : [ 0 ],
+					"cuttoff" : [ 1000 ],
+					"prob" : [ 50 ],
+					"transpose" : [ 12 ]
+				}
+
+			}
+,
+			"2" : 			{
+				"id" : 2,
+				"data" : 				{
+					"stringVibrato" : [ 5, 0.5 ],
+					"stringLoose" : [ 1, 0.05 ],
+					"stringAdsr0" : [ 1, 100, 0, 0 ],
+					"stringMode" : [ 0.75 ],
+					"cuttoff" : [ 5000 ],
+					"prob" : [ 80 ],
+					"transpose" : [ 24 ]
+				}
+
+			}
+,
+			"3" : 			{
+				"id" : 3,
+				"data" : 				{
+					"stringVibrato" : [ 0.01, 0.05 ],
+					"stringLoose" : [ 1, 0.05 ],
+					"stringAdsr0" : [ 50, 250, 0, 0 ],
+					"stringMode" : [ 1 ],
+					"cuttoff" : [ 20000 ],
+					"prob" : [ 100 ],
+					"transpose" : [ 0 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}
